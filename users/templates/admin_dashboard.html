@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #e8f5e9;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2e7d32;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+        }
+
+        th, td {
+            border: 1px solid #c8e6c9;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #a5d6a7;
+        }
+
+        form {
+            display: inline;
+            margin: 10px;
+        }
+
+        button {
+            background-color: #66bb6a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background-color: #4caf50;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin: 10px auto;
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Admin Dashboard</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="show_data">Show All User Data</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="hide_data">Hide Data</button>
+    </form>
+
+    <form action="{% url 'logout' %}" method="get">
+        <button type="submit">Logout</button>
+    </form>
+
+    <a href="{% url 'query_injection' %}" class="nav-link">🔍 Go to SQL (query-injection) execution page</a>
+
+    {% if users %}
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>ID Number</th>
+                    <th>Credit Card Number</th>
+                    <th>Valid Date</th>
+                    <th>CVC</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        {% for field in user %}
+                            <td>{{ field }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>

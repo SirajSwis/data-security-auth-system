@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raw SQL Injection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+        }
+        textarea {
+            width: 400px;
+            height: 150px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 10px;
+            font-size: 18px;
+            padding: 5px 15px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+        .note {
+            color: darkred;
+            margin: 15px auto;
+            font-size: 14px;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SQL Injection Playground</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="query" placeholder="Write your SQL query here..."></textarea><br>
+        <button type="submit">Run Query</button>
+    </form>
+
+    <div class="note">
+        ⚠️ Please do not include characters such as <code>'</code>, <code>"</code>, <code>--</code>, <code>=</code>, <code>;</code> or SQL keywords like <code>DROP</code>, <code>UNION</code>, etc.
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p class="error">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    {% if data %}
+        <h2>Results:</h2>
+        <ul>
+            {% for row in data %}
+                <li>{{ row }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

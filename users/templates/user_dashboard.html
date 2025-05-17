@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf6eb;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .header {
+            background-color: #eaf6eb;
+            padding: 40px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2f8f2f;
+        }
+
+        .container {
+            padding-top: 30px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #3aa343;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        WELCOME TO USER DASHBOARD
+    </div>
+
+    <div class="container">
+        <form method="post" action="/logout/">
+            {% csrf_token %}
+            <button type="submit" class="button">Logout</button>
+        </form>
+    </div>
+</body>
+</html>
